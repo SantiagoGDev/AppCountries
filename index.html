@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Countryes</title>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+	<header class="header">
+		<h2 class="header__title">
+			Where in the World ? 
+		</h2>
+		<div class="header__mode">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 10.999c1.437.438 2.562 1.564 2.999 3.001.44-1.437 1.565-2.562 3.001-3-1.436-.439-2.561-1.563-3.001-3-.437 1.436-1.562 2.561-2.999 2.999zm8.001.001c.958.293 1.707 1.042 2 2.001.291-.959 1.042-1.709 1.999-2.001-.957-.292-1.707-1.042-2-2-.293.958-1.042 1.708-1.999 2zm-1-9c-.437 1.437-1.563 2.562-2.998 3.001 1.438.44 2.561 1.564 3.001 3.002.437-1.438 1.563-2.563 2.996-3.002-1.433-.437-2.559-1.564-2.999-3.001zm-7.001 22c-6.617 0-12-5.383-12-12s5.383-12 12-12c1.894 0 3.63.497 5.37 1.179-2.948.504-9.37 3.266-9.37 10.821 0 7.454 5.917 10.208 9.37 10.821-1.5.846-3.476 1.179-5.37 1.179z"/></svg>
+			<span class="header__mode-text">
+				Dark Mode
+			</span>
+		</div>
+	</header>
+	<section class="filtros">
+		<form method="#" class="search-form" id="search-form">
+			<div class="search-form__component">
+				<svg class="search-form__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M23.111 20.058l-4.977-4.977c.965-1.52 1.523-3.322 1.523-5.251 0-5.42-4.409-9.83-9.829-9.83-5.42 0-9.828 4.41-9.828 9.83s4.408 9.83 9.829 9.83c1.834 0 3.552-.505 5.022-1.383l5.021 5.021c2.144 2.141 5.384-1.096 3.239-3.24zm-20.064-10.228c0-3.739 3.043-6.782 6.782-6.782s6.782 3.042 6.782 6.782-3.043 6.782-6.782 6.782-6.782-3.043-6.782-6.782zm2.01-1.764c1.984-4.599 8.664-4.066 9.922.749-2.534-2.974-6.993-3.294-9.922-.749z"/></svg>
+				<input type="text" name="search" class="search-form__field" placeholder="Search for a country...">
+			</div>
+			<select class="select-region" name="region">
+				<option value="" class="select-region__option">Filter by region</option>
+				<option value="Africa" class="select-region__option">Africa</option>
+				<option value="Americas" class="select-region__option">Americas</option>
+				<option value="Asia" class="select-region__option">Asia</option>
+				<option value="Europe" class="select-region__option">Europe</option>
+				<option value="Oceania" class="select-region__option">Oceania</option>
+			</select>
+		</form>
+	</section>
+	<section class="loaders">
+		<div class="lds-ripple">
+			<div></div>
+			<div></div>
+		</div>
+	</section>
+	<section id="app" class="countries">
+	</section>
+
+	<template id="template-card-country">
+		<div class="card-country">
+			<figure class="card-country__box">
+				<img src="https://restcountries.eu/data/afg.svg" alt="" class="card-country__flag">
+			</figure>
+			<div class="card-country__content">
+				<h2 class="card-country__title">Afghanistan</h2>
+				<p class="card-country__text" id="country-population">
+					<span class="card-country__property">
+						Population :
+					</span>
+					<span class="card-country__value">
+						27657145
+					</span>
+				</p>
+				<p class="card-country__text" id="country-region">
+					<span class="card-country__property">
+						Region :
+					</span>
+					<span class="card-country__value">
+						Asia
+					</span>
+				</p>
+				<p class="card-country__text" id="country-capital">
+					<span class="card-country__property">
+						Capital :
+					</span>
+					<span class="card-country__value">
+						Afghanistan
+					</span>
+				</p>
+				<button class="card-country__btn btn">More Info</button>
+			</div>
+		</div>
+	</template>
+	<script src="js/app.js" type="module"></script>
+</body>
+</html>
