@@ -1,14 +1,18 @@
-import {paises} from './app.js';
-export function searchPaises(value) {
+import {countryService} from './app.js';
+
+export function searchCountriesByTerm(value) {
 	return new Promise((res, rej) => {
 		let arraySearch = [];
-		paises.allPaises().then(response => {
-			response.map(pais => {
-				const name = pais.name.toLowerCase();
+		countryService.findAll().then(resp => {
+			resp.map(country => {
+				const name = country.name.common.toLowerCase();
 				const search  = value.toLowerCase();
-				if(name.indexOf(search) >= 0) arraySearch.push(pais);
+				if(name.indexOf(search) >= 0) arraySearch.push(country);
 			});
 			res(arraySearch);
-		})
+		}).catch(err => {
+			console.log(err);
+			rej(err);
+		});
 	});
 }

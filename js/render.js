@@ -8,14 +8,14 @@ function formatNumber (n) {
 export function renderCardsCountries(data) {
 	const fragment = document.createDocumentFragment();
 	const template = document.getElementById('template-card-country').content
-	data.forEach( pais => {
+	data.forEach( country => {
 		const clone = template.cloneNode(true);
-		clone.querySelector('.card-country__flag').src = pais.flag;
-		clone.querySelector('.card-country__title').innerText = pais.name;
-		clone.getElementById('country-population').querySelector('.card-country__value').innerText = formatNumber(pais.population);
-		clone.getElementById('country-region').querySelector('.card-country__value').innerText = pais.region;
-		clone.getElementById('country-capital').querySelector('.card-country__value').innerText = pais.capital;
-		clone.querySelector('.card-country__btn').setAttribute('data-name-country',pais.name)
+		clone.querySelector('.card-country__flag').src = country.flags.svg;
+		clone.querySelector('.card-country__title').innerText = country.name.common;
+		clone.getElementById('country-population').querySelector('.card-country__value').innerText = formatNumber(country.population);
+		clone.getElementById('country-region').querySelector('.card-country__value').innerText = country.region;
+		clone.getElementById('country-capital').querySelector('.card-country__value').innerText = country.capital;
+		clone.querySelector('.card-country__btn').setAttribute('data-name-country',country.name.common)
 		fragment.appendChild(clone)
 	});
 	clearContent(app);

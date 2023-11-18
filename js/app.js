@@ -1,11 +1,11 @@
-import {Paises} from './API.js';
+import {CountryService} from './API.js';
 import {renderCardsCountries} from './render.js';
-import {filterPaises} from './filterPaises.js';
-import {searchPaises} from './searchPaises.js';
+import {filteredCountriesByRegion} from './filterPaises.js';
+import {searchCountriesByTerm} from './searchPaises.js';
 import {renderCountry} from './renderCountry.js';
 import {clearContent} from './clearContent.js';
 
-export const paises = new Paises();
+export const countryService = new CountryService();
 export const app = document.getElementById('app')
 const formSearch = document.getElementById('search-form');
 
@@ -32,9 +32,9 @@ function actionsBtns(e) {
 	const btn = e.target.classList[0];
 	if(btn === 'info-country__btn-back') HomePage();
 	if(btn === 'card-country__btn'){
-		const pais = e.target.getAttribute('data-name-country');
-		paises.getCountry(pais).then(res => {
-			console.log(res);
+		const country = e.target.getAttribute('data-name-country');
+		countryService.findCountryByName(country).then(res => {
+			//console.log(res);
 			renderCountry(res)
 		});
 	}
@@ -44,7 +44,7 @@ function actionsBtns(e) {
 function HomePage() {
 	clearContent(app);
 	loader.open();
-	paises.allPaises().then(res => {
+	countryService.findAll().then(res => {
 		setTimeout(()=> {
 			loader.close();
 			renderCardsCountries(res)
@@ -55,9 +55,9 @@ function HomePage() {
 async function actionFormChanges(e) {
 	const data = getDataForm(e.currentTarget);
 	let render  = [];
-	if(data.field === '') render = await paises.allPaises();
-	if(data.select) render = await filterPaises(data.select)
-	if(data.field) render = await searchPaises(data.field)
+	if(data.field === '') render = await countryService.findAll();
+	if(data.select) render = await filteredCountriesByRegion(data.select)
+	if(data.field) render = await searchCountriesByTerm(data.field)
 	renderCardsCountries(render)
 }
 

@@ -1,46 +1,49 @@
-export class Paises{
-	constructor() {
-		this.dataPaises  = [];
-		if(typeof Paises.instance === 'Object'){
-			return Paises.instance;
+export class CountryService{
+
+	constructor(local = false) {
+		this.countries  = [];
+		this.local = local;
+		if(typeof CountryService.instance === 'Object'){
+			return CountryService.instance;
 		}
-		Paises.instance = this;
+		CountryService.instance = this;
 		return this;
 	}
 
-	async getData(){
+	async findData(){
 		try {
-			const url = 'https://restcountries.eu/rest/v2/all';
-			const data = await fetch(url).then(res => res.json())
-			return data	
+			const url = 'https://restcountries.com/v3.1/all';
+			const data = await fetch(url).then(res => res.json());
+			console.log(data);
+			this.countries = data;
+			return data;
 		} catch(err) {
 			console.log(err);
 		}
 	}
 
-	async getDataLocal(){
+	async findLocalData(){
 		try {
 			const url = 'data/countries.json';
-			const data = await fetch(url).then(res => res.json())
+			const data = await fetch(url).then(res => res.json());
+			this.countries = data;
 			return data	
 		} catch(err) {
 			console.log(err);
 		}
 	}
 
-	async allPaises(){
-		const data = await this.getData();
-		const filtro = data.map( pais => {
-			const {flag,name,population,region,capital} = pais;
-			return {
-				flag,name,population,region,capital
-			}
-		})
-		return filtro;
+	async findAll(){
+		if(this.countries.length > 0){
+			return this.countries;
+		}else{
+			return  this.local ?  await this.findLocalData() :  await this.findData();
+		}
+		return data;
 	}
 
-	async getCountry(name){
-		const data = await this.getData();
-		return data.filter(pais => pais.name === name)[0]
+	async findCountryByName(name){
+		const filtered =  this.countries.filter(country => country.name.common === name);
+		return filtered[0];
 	}
 }

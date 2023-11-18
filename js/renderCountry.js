@@ -12,22 +12,23 @@ export function renderCountry(data) {
 }
 
 function contentCountry(country) {
+	console.log(country);
 	return ` 
 	<button class="info-country__btn-back btn">
 		Back
 	</button>
 	<div class="info-country__align">
 		<figure class="info-country__box">
-			<img src="${country.flag}" alt="${country.name}">
+			<img src="${country.flags.svg}" alt="${country.name.common}">
 		</figure>
 		<div class="info-country__content">
-			<h2 class="info-country__title">${country.name}</h2>
+			<h2 class="info-country__title">${country.name.common}</h2>
 			<p class="info-country__text">
 				<span class="info-country__property">
 					NativeName :
 				</span>
 				<span class="info-country__value">
-					${country.nativeName}
+					${country.name.official}
 				</span>
 			</p>
 			<p class="info-country__text">
@@ -64,10 +65,10 @@ function contentCountry(country) {
 			</p>
 			<p class="info-country__text">
 				<span class="info-country__property">
-					Top Level Domain:
+					Area :
 				</span>
 				<span class="info-country__value">
-					${country.topLevelDomain[0]}
+					${country.area}
 				</span>
 			</p>
 			<p class="info-country__text">
@@ -75,7 +76,7 @@ function contentCountry(country) {
 					Concurrencies:
 				</span>
 				<span class="info-country__value">
-					${country.currencies[0].name}
+					${ country.currencies[Object.keys(country.currencies)[0]].name}
 				</span>
 			</p>
 			<p class="info-country__text">
@@ -83,7 +84,7 @@ function contentCountry(country) {
 					Languages:
 				</span>
 				<span class="info-country__value">
-					${country.languages.map( el => el.name)}
+					${Object.values(country.languages)}
 				</span>
 			</p>
 			<p class="info-country__text">

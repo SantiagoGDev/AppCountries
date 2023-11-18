@@ -1,9 +1,10 @@
-import {paises} from './app.js';
-export function filterPaises(region) {
+import {countryService} from './app.js';
+
+export function filteredCountriesByRegion(region) {
 	return new Promise((res, rej) => {
-		paises.allPaises().then(response => {
-			const filtro = response.filter( pais => pais.region === region)
-			res(filtro)
+		countryService.findAll().then(response => {
+			const filter = response.filter( country => country.region === region)
+			res(filter)
 		})
 	});
 }
